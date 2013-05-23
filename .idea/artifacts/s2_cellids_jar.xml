@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="s2-cellids:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/s2_cellids_jar</output-path>
+    <root id="archive" name="s2-cellids.jar">
+      <element id="module-output" name="s2-cellids" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../s2-geometry-library-java/build/s2-geometry-java.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../s2-geometry-library-java/lib/guava-r09.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/commons-cli-1.2/commons-cli-1.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
