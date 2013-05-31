@@ -105,11 +105,6 @@ public class Main {
             ne = format(ne);
             sw = format(sw);
 
-            System.out.println(ne[0]);
-            System.out.println(ne[1]);
-            System.out.println(sw[0]);
-            System.out.println(sw[1]);
-
             try {
                 neLat = Double.parseDouble(ne[0]);
                 neLng = Double.parseDouble(ne[1]);
@@ -146,10 +141,13 @@ public class Main {
         LocationCoordinate2D swCoord = new LocationCoordinate2D(swLat,swLng);
         S2Geometry s = new S2Geometry();
         List<String> cellIds = s.cellsForRegion(neCoord,swCoord,minZoomLevel,maxZoomLevel);
+        StringBuffer sb = new StringBuffer();
         for(String cellId : cellIds)
         {
-            System.out.println(cellId);
+            sb.append(cellId).append(',');
         }
+        String result = sb.toString();
+        System.out.println(result.substring(0,result.length()-1));
     }
 
     // 把Lat6，Lng6转成Double
