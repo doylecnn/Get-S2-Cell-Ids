@@ -13,16 +13,6 @@ public class Main {
     }
 
     private void command(String[] args) {
-//        options.addOption(OptionBuilder.withLongOpt("center").withArgName( "lat,lng" )
-//                .hasArg()
-//                .withDescription( "center coordinate" )
-//                .create( "c"));
-//
-//        options.addOption(OptionBuilder.withLongOpt("range").withArgName( "km" )
-//                .hasArg()
-//                .withDescription( "range" )
-//                .create( "r"));
-
         options.addOption(OptionBuilder.withLongOpt("northEastCoord").withArgName( "lat,lng" )
                 .hasArg()
                 .withDescription( "north east coordinate" )
@@ -64,34 +54,6 @@ public class Main {
         }
 
         Double neLat=0.0,neLng=0.0,swLat=0.0,swLng=0.0;
-//        if ((line.hasOption("c") || line.hasOption("r")) && !(line.hasOption("ne") && line.hasOption("sw"))){
-//            String[] center= line.getOptionValue("ne").split(",");
-//            if(center.length!=2)
-//            {
-//                System.err.println( "Parsing failed.  Reason: -c 参数格式错误" );
-//                showHelp(1);
-//            }
-//            center = format(center);
-//
-//
-//            if(line.hasOption("r")){
-//
-//            }
-//
-//            try {
-//                neLat = Double.parseDouble(center[0])+1.0;
-//                neLng = Double.parseDouble(center[1])+1.0;
-//                swLat = Double.parseDouble(center[0])-1.0;
-//                swLng = Double.parseDouble(center[1])-1.0;
-//            }
-//            catch( NumberFormatException exp ) {
-//                // oops, something went wrong
-//                System.err.println( "Parsing failed.  Reason: " + exp.getMessage() );
-//                showHelp(1);
-//            }
-//
-//        }
-//        else
         if (line.hasOption("ne") && line.hasOption("sw") && !(line.hasOption("c") || line.hasOption("r"))){
             String[] ne = line.getOptionValue("ne").split(",");
             String[] sw = line.getOptionValue("sw").split(",");
@@ -155,9 +117,15 @@ public class Main {
         String[] result = new String[coordString.length];
         for(int i=0;i<coordString.length;i++){
             String s = coordString[i];
-            if(s.length()>=8 && s.indexOf(".")<0){
-                s = s.substring(0,s.length()-6)+"."+s.substring(s.length()-6);
-                result[i] = s;
+            if(s.indexOf(".")<0) {
+                if(s.length()>6) {
+                    s = s.substring(0,s.length()-6)+"."+s.substring(s.length()-6);
+                    result[i] = s;
+                }
+                else {
+                    s = String.format("%06d", Integer.parseInt(s));
+                    result[i] = s;
+                }
             }
         }
         return result;
